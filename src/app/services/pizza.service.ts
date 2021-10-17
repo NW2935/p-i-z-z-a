@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
 import { PizzaOrder } from '../models/pizza-order';
 
@@ -10,7 +10,7 @@ import { PizzaOrder } from '../models/pizza-order';
 export class PizzaService {
     public pizzaOrders$: Observable<PizzaOrder[]>;
 
-    private _pizzaOrders$ =  new Subject<PizzaOrder[]>();
+    private _pizzaOrders$ =  new BehaviorSubject<PizzaOrder[]>([]);
 
     constructor(private http: HttpClient) {
         this.pizzaOrders$ = this._pizzaOrders$.asObservable();
