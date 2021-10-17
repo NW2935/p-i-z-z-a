@@ -1,0 +1,30 @@
+<h2 mat-dialog-title>New Pizza Order</h2>
+
+<mat-dialog-content>
+    <form class="new-order-pizza-form" [formGroup]="pizzaForm" autocomplete="off">
+        <mat-form-field>
+            <mat-label>Crust</mat-label>
+            <input matInput formControlName="Crust" />
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Flavor</mat-label>
+            <input matInput formControlName="Flavor" />
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Size</mat-label>
+            <input matInput formControlName="Size" />
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>Table #</mat-label>
+            <input matInput type="number" formControlName="Table_No" />
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions class="new-order-pizza-form-actions-container">
+    <button mat-flat-button (click)="onCancelClick()">Cancel</button>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!pizzaForm.valid" (click)="onSubmitClick()">Submit</button>
+</mat-dialog-actions>

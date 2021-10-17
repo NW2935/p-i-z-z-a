@@ -12,6 +12,6 @@ export class OrdersComponent {
     constructor(
         public pizzaService: PizzaService
     ) {
-        this.pizzaService.getPizzaOrders$().subscribe();
+        this.pizzaService.refreshPizzaOrders$().subscribe();
     }
 }

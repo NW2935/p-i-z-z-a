@@ -1,34 +1,46 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { catchError, switchMap, tap } from 'rxjs/operators';
+import { SnackBarService } from './snack-bar.service';
+import { catchError, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthenticationService {
-    public accessToken$: Observable<string>;
+    private keepAliveMs = 300000;
 
-    private _accessToken$ = new BehaviorSubject<string>('');
+    constructor(
+        private http: HttpClient,
+        private snackbarService: SnackBarService
+    ) { }
 
-    constructor(private http: HttpClient) {
-        this.accessToken$ = this._accessToken$.asObservable();
-    }
-
-    authenticate$(username: string, password: string): Observable<boolean> {      
+    public authenticate$(username: string, password: string): Observable<boolean> {      
         return this.http.post('/api/auth', { username, password }).pipe(
-            tap((response: any) => this._accessToken$.next(response.access_token)),
-            switchMap(() => of(true)),
+            tap((response: any) => this.setSession(response)),
             catchError((error: HttpErrorResponse) => {
-                this._accessToken$.next('');
-                const errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
-                console.log(errorMessage);
+                this.snackbarService.displayErrorSnackBar(`${error.status === 401 ? 'Invalid username or password.' : 'Login failed.'}`);
                 return of(false);
             })
         );
     }
 
-    deauthenticate(): void {
-        this._accessToken$.next('');
+    public isAuthenticated(): boolean {
+        return Date.now() < this.getExpiration();
     }
+
+    public deauthenticate(): void {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('expires_at');
+    }
+
+    private getExpiration(): number {
+        const expiration = localStorage.getItem('expires_at');
+        return parseInt(expiration || '');
+    }
+
+    private setSession(authResult: any) {
+        localStorage.setItem('access_token', authResult.access_token);
+        localStorage.setItem('expires_at', JSON.stringify(Date.now() + this.keepAliveMs) );
+    } 
 }

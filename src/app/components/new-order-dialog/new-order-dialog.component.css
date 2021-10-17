@@ -1,0 +1,12 @@
+.new-order-pizza-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.new-order-pizza-form-actions-container {
+    justify-content: center;
+}
+
+.new-order-pizza-form-actions-container button {
+    margin: 0px 5px;
+}
