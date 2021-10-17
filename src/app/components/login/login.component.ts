@@ -1,6 +1,7 @@
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -14,7 +15,8 @@ export class LoginComponent {
     constructor(
         private authenticationService: AuthenticationService,
         private router: Router,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private snackbarService: SnackBarService
     ) {
         this.loginForm = this.formBuilder.group({
             username: ['', Validators.required],
@@ -24,6 +26,12 @@ export class LoginComponent {
 
     onLoginClick(): void {
         const loginInfo = this.loginForm.getRawValue();
-        this.authenticationService.authenticate$(loginInfo.username, loginInfo.password).subscribe(() => this.router.navigate(['/dashboard']));
+        this.authenticationService.authenticate$(loginInfo.username, loginInfo.password).subscribe((loginSuccess: boolean) => {
+            if (loginSuccess) {
+                this.router.navigate(['/dashboard']);
+            } else {
+                this.snackbarService.displayErrorSnackBar('Login failed.');
+            }
+        });
     }
 }
