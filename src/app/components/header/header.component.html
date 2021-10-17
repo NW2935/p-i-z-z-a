@@ -1,0 +1,5 @@
+<div class="header">
+    <span class="material-icons">local_pizza</span>
+    <span class="title">P-I-Z-Z-A</span>
+    <span *ngIf="authenticationService.accessToken$ | async" class="material-icons logout" (click)="onLogoutClick()">logout</span>
+</div>

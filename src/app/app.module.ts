@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { OrdersComponent } from './components/orders/orders.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         OrdersComponent,
+        HeaderComponent,
     ],
     imports: [
         BrowserModule,

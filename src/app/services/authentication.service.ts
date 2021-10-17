@@ -21,4 +21,8 @@ export class AuthenticationService {
             switchMap(() => EMPTY),
         );
     }
+
+    deauthenticate(): void {
+        this._accessToken$.next('');
+    }
 }

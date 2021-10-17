@@ -1,0 +1,20 @@
+.header {
+    height: 48px;
+    display: flex;
+    align-items: center;
+    background-color: #3F51B5;
+    color: white;
+}
+
+.title {
+    font-size: 24px;
+}
+
+.material-icons {
+    padding: 0px 16px;
+}
+
+.material-icons:last-of-type {
+    margin-left: auto;
+    cursor: pointer;
+}
