@@ -1,26 +1,25 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { OrdersComponent } from './components/orders/orders.component';
+import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatTableModule } from '@angular/material/table';
+import { BrowserModule } from '@angular/platform-browser';
 import { HeaderComponent } from './components/header/header.component';
+import { MatTableModule } from '@angular/material/table';
+import { NgModule } from '@angular/core';
+import { OrdersComponent } from './components/orders/orders.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         OrdersComponent,
-        HeaderComponent,
+        HeaderComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        MatTableModule,
+        MatTableModule
     ],
     providers: [],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

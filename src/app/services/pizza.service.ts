@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { PizzaOrder } from '../models/pizza-order';
 import { BehaviorSubject, EMPTY, Observable } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators';
-import { PizzaOrder } from '../models/pizza-order';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class PizzaService {
     public pizzaOrders$: Observable<PizzaOrder[]>;
@@ -19,7 +19,7 @@ export class PizzaService {
     getPizzaOrders$(): Observable<never> {
         return this.http.get<PizzaOrder[]>('/api/orders').pipe(
             tap((orders: PizzaOrder[]) => this._pizzaOrders$.next(orders)),
-            switchMap(() => EMPTY),
+            switchMap(() => EMPTY)
         );
     }
 }
