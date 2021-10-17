@@ -1,5 +1,6 @@
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-header',
@@ -8,10 +9,12 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
     constructor(
-        public authenticationService: AuthenticationService
+        public authenticationService: AuthenticationService,
+        private router: Router
     ) { }
 
     onLogoutClick() {
         this.authenticationService.deauthenticate();
+        this.router.navigate(['/login']);
     }
 }

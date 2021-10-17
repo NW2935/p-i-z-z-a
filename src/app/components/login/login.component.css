@@ -1,0 +1,16 @@
+:host {
+    display: flex;
+    justify-content: center;   
+    align-items: center;
+    height: calc(100vh - 48px);
+}
+
+form {
+    display: flex;
+    width: 150px;
+    flex-direction: column;
+}
+
+button {
+    width: fit-content;
+}

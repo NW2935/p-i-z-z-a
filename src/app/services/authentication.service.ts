@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable, ReplaySubject } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, switchMap, tap } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -9,16 +9,22 @@ import { switchMap, tap } from 'rxjs/operators';
 export class AuthenticationService {
     public accessToken$: Observable<string>;
 
-    private _accessToken$ = new ReplaySubject<string>(1);
+    private _accessToken$ = new BehaviorSubject<string>('');
 
     constructor(private http: HttpClient) {
         this.accessToken$ = this._accessToken$.asObservable();
     }
 
-    authenticate$(username: string, password: string): Observable<never> {      
+    authenticate$(username: string, password: string): Observable<boolean> {      
         return this.http.post('/api/auth', { username, password }).pipe(
             tap((response: any) => this._accessToken$.next(response.access_token)),
-            switchMap(() => EMPTY)
+            switchMap(() => of(true)),
+            catchError((error: HttpErrorResponse) => {
+                this._accessToken$.next('');
+                const errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+                console.log(errorMessage);
+                return of(false);
+            })
         );
     }
 
