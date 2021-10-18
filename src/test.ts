@@ -1,8 +1,8 @@
 // This file is required by karma.conf.js and loads recursively all the .spec and framework files
-
+import 'zone.js/testing'; // this import must be first
+// eslint-disable-next-line sort-imports
 import { getTestBed } from '@angular/core/testing';
 import { BrowserDynamicTestingModule, platformBrowserDynamicTesting } from '@angular/platform-browser-dynamic/testing';
-import 'zone.js/testing';
 
 declare const require: {
     context(path: string, deep?: boolean, filter?: RegExp): {

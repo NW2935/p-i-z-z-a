@@ -1,3 +1,7 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTableModule } from '@angular/material/table';
 import { OrdersComponent } from './orders.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
@@ -7,9 +11,14 @@ describe('OrdersComponent', (): void => {
 
     beforeEach(async (): Promise<void> => {
         await TestBed.configureTestingModule({
+            imports: [
+                HttpClientTestingModule,
+                MatSnackBarModule,
+                MatDialogModule,
+                MatTableModule
+            ],
             declarations: [ OrdersComponent ]
-        })
-            .compileComponents();
+        });
     });
 
     beforeEach((): void => {
