@@ -11,6 +11,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
     styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+    filterToken = '';
+
     constructor(
         private dialog: MatDialog,
         private pizzaService: PizzaService
@@ -26,5 +28,10 @@ export class DashboardComponent {
             filter((formData: any) => formData),
             switchMap((newPizzaOrder: PizzaOrder) => this.pizzaService.submitPizzaOrder$(newPizzaOrder))
         ).subscribe();
+    }
+
+    onFilterKeyUp(event: KeyboardEvent) {
+        const filterToken = (<HTMLInputElement>event.target).value;
+        this.filterToken = filterToken.trim().toLocaleLowerCase();
     }
 }

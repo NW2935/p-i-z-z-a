@@ -1,4 +1,8 @@
  <div class="dashboard-toolbar">
     <button color="primary" mat-flat-button type="submit" (click)="onNewOrderClick()">New Order</button>
+    <mat-form-field class="order-filter-form-field">
+        <mat-label>Filter orders</mat-label>
+        <input matInput type="text" (keyup)="onFilterKeyUp($event)" autocomplete="off">
+    </mat-form-field>
 </div>
-<app-orders></app-orders>
+<app-orders [filterToken]="filterToken"></app-orders>

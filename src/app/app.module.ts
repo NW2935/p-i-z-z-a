@@ -3,6 +3,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HeaderComponent } from './components/header/header.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -17,8 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { NewOrderDialogComponent } from './components/new-order-dialog/new-order-dialog.component';
 import { NgModule } from '@angular/core';
 import { OrdersComponent } from './components/orders/orders.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [
@@ -41,7 +41,8 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
         MatButtonModule,
         MatSnackBarModule,
         MatDialogModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        FormsModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: AccessTokenInterceptor, multi: true }

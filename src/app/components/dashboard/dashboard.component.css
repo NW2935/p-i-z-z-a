@@ -4,3 +4,8 @@
     align-items: center;
     margin: 0px 6px;
 }
+
+mat-form-field {
+    margin-left: auto;
+    top: 9px;
+}

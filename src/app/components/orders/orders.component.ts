@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogModel } from 'src/app/models/confirmation-dialog-model';
+import { MatTableDataSource } from '@angular/material/table';
+import { PizzaOrder } from 'src/app/models/pizza-order';
 import { PizzaService } from 'src/app/services/pizza.service';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { filter, switchMap } from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
@@ -10,7 +12,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.css']
 })
-export class OrdersComponent {
+export class OrdersComponent implements OnInit, OnChanges {
+    @Input() filterToken = '';
+
+    dataSource = new MatTableDataSource<PizzaOrder>();
     displayedColumns: string[] = ['Order_ID', 'Table_No', 'Timestamp', 'Size', 'Crust', 'Flavor', 'Delete'];
 
     constructor(
@@ -18,6 +23,16 @@ export class OrdersComponent {
         private dialog: MatDialog
     ) {
         this.pizzaService.refreshPizzaOrders$().subscribe();
+    }
+
+    ngOnInit(): void {
+        this.pizzaService.pizzaOrders$.subscribe((pizzaOrders: PizzaOrder[]): void => {
+            this.dataSource.data = pizzaOrders;
+        });
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        this.dataSource.filter = changes.filterToken?.currentValue;
     }
 
     public onDeleteOrderClick(orderId: number) {
