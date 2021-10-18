@@ -24,7 +24,10 @@ export class LoginComponent {
 
     onLoginClick(): void {
         const loginInfo = this.loginForm.value;
-        this.authenticationService.authenticate$(loginInfo.username, loginInfo.password).subscribe((loginSuccess: boolean): void => {
+        this.authenticationService.authenticate$(
+            loginInfo.username as string,
+            loginInfo.password as string
+        ).subscribe((loginSuccess: boolean): void => {
             if (loginSuccess) {
                 this.router.navigate(['/dashboard']);
             }

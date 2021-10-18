@@ -40,7 +40,7 @@ export class AuthenticationService {
     }
 
     private setSession(authResult: any): void {
-        localStorage.setItem('access_token', authResult.access_token);
+        localStorage.setItem('access_token', authResult.access_token as string);
         localStorage.setItem('expires_at', JSON.stringify(Date.now() + this.keepAliveMs) );
     } 
 }

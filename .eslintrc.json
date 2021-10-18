@@ -21,6 +21,7 @@
         "airbnb-typescript/base"
       ],
       "rules": {
+        "@typescript-eslint/no-unsafe-argument": ["error"],
         "@typescript-eslint/explicit-function-return-type": [
           "error",
           {
