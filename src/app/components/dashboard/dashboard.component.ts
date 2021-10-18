@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NewOrderDialogComponent } from '../new-order-dialog/new-order-dialog.component';
+import { Observable } from 'rxjs';
 import { PizzaOrder } from 'src/app/models/pizza-order';
 import { PizzaService } from 'src/app/services/pizza.service';
 import { filter, switchMap } from 'rxjs/operators';
@@ -25,12 +26,12 @@ export class DashboardComponent {
 
         const dialogRef = this.dialog.open(NewOrderDialogComponent, dialogConfig);
         dialogRef.afterClosed().pipe(
-            filter((formData: any) => formData),
-            switchMap((newPizzaOrder: PizzaOrder) => this.pizzaService.submitPizzaOrder$(newPizzaOrder))
+            filter((formData: any): boolean => !!formData),
+            switchMap((newPizzaOrder: PizzaOrder): Observable<void> => this.pizzaService.submitPizzaOrder$(newPizzaOrder))
         ).subscribe();
     }
 
-    onFilterKeyUp(event: KeyboardEvent) {
+    onFilterKeyUp(event: KeyboardEvent): void {
         const filterToken = (<HTMLInputElement>event.target).value;
         this.filterToken = filterToken.trim().toLocaleLowerCase();
     }

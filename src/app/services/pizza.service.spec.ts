@@ -2,15 +2,15 @@ import { PizzaService } from './pizza.service';
 import { TestBed } from '@angular/core/testing';
 
 
-describe('PizzaService', () => {
+describe('PizzaService', (): void => {
     let service: PizzaService;
 
-    beforeEach(() => {
+    beforeEach((): void => {
         TestBed.configureTestingModule({});
         service = TestBed.inject(PizzaService);
     });
 
-    it('should be created', () => {
+    it('should be created', (): void => {
         expect(service).toBeTruthy();
     });
 });

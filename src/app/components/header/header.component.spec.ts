@@ -1,24 +1,24 @@
 import { HeaderComponent } from './header.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-describe('HeaderComponent', () => {
+describe('HeaderComponent', (): void => {
     let component: HeaderComponent;
     let fixture: ComponentFixture<HeaderComponent>;
 
-    beforeEach(async () => {
+    beforeEach(async (): Promise<void> => {
         await TestBed.configureTestingModule({
             declarations: [ HeaderComponent ]
         })
             .compileComponents();
     });
 
-    beforeEach(() => {
+    beforeEach((): void => {
         fixture = TestBed.createComponent(HeaderComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
-    it('should create', () => {
+    it('should create', (): void => {
         expect(component).toBeTruthy();
     });
 });

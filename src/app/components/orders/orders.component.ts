@@ -1,6 +1,7 @@
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { ConfirmationDialogModel } from 'src/app/models/confirmation-dialog-model';
 import { MatTableDataSource } from '@angular/material/table';
+import { Observable } from 'rxjs';
 import { PizzaOrder } from 'src/app/models/pizza-order';
 import { PizzaService } from 'src/app/services/pizza.service';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
@@ -35,7 +36,7 @@ export class OrdersComponent implements OnInit, OnChanges {
         this.dataSource.filter = changes.filterToken?.currentValue;
     }
 
-    public onDeleteOrderClick(orderId: number) {
+    public onDeleteOrderClick(orderId: number): void {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.autoFocus = true;
         dialogConfig.disableClose = true;
@@ -44,7 +45,7 @@ export class OrdersComponent implements OnInit, OnChanges {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, dialogConfig);
         dialogRef.afterClosed().pipe(
             filter((confirmedDelete: boolean): boolean => confirmedDelete),
-            switchMap(() => this.pizzaService.deletePizzaOrder$(orderId))
+            switchMap((): Observable<void> => this.pizzaService.deletePizzaOrder$(orderId))
         ).subscribe();
     }
 }

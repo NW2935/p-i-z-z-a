@@ -13,7 +13,7 @@ export class HeaderComponent {
         private router: Router
     ) { }
 
-    onLogoutClick() {
+    onLogoutClick(): void {
         this.authenticationService.deauthenticate();
         this.router.navigate(['/login']);
     }

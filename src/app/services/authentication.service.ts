@@ -17,8 +17,8 @@ export class AuthenticationService {
 
     public authenticate$(username: string, password: string): Observable<boolean> {      
         return this.http.post('/api/auth', { username, password }).pipe(
-            tap((response: any) => this.setSession(response)),
-            catchError((error: HttpErrorResponse) => {
+            tap((response: any): void => this.setSession(response)),
+            catchError((error: HttpErrorResponse): Observable<boolean> => {
                 this.snackbarService.displayErrorSnackBar(`${error.status === 401 ? 'Invalid username or password.' : 'Login failed.'}`);
                 return of(false);
             })
@@ -39,7 +39,7 @@ export class AuthenticationService {
         return parseInt(expiration || '');
     }
 
-    private setSession(authResult: any) {
+    private setSession(authResult: any): void {
         localStorage.setItem('access_token', authResult.access_token);
         localStorage.setItem('expires_at', JSON.stringify(Date.now() + this.keepAliveMs) );
     } 

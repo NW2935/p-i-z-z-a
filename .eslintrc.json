@@ -21,6 +21,12 @@
         "airbnb-typescript/base"
       ],
       "rules": {
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowTypedFunctionExpressions": false
+          }
+        ],
         "@typescript-eslint/indent": ["error", 4],
         "sort-imports": [
           "error",

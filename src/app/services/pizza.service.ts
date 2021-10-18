@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PizzaOrder } from '../models/pizza-order';
 import { SnackBarService } from './snack-bar.service';
-import { BehaviorSubject, EMPTY, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
@@ -22,8 +22,8 @@ export class PizzaService {
 
     refreshPizzaOrders$(): Observable<void> {
         return this.http.get<PizzaOrder[]>('/api/orders').pipe(
-            tap((orders: PizzaOrder[]) => this._pizzaOrders$.next(orders)),
-            switchMap(() => EMPTY)
+            tap((orders: PizzaOrder[]): void => this._pizzaOrders$.next(orders)),
+            switchMap((): Observable<void> => of())
         );
     }
 
