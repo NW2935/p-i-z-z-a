@@ -13,11 +13,16 @@ export class AuthGuard implements CanActivate {
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-        if (this.authenticationService.isAuthenticated()) {
-            return true;
-        } else {
+        const targetRoute = route.routeConfig?.path;
+
+        if (this.authenticationService.isAuthenticated() && targetRoute === 'login') {
+            this.router.navigate(['']);
+            return false;
+        } else if (!this.authenticationService.isAuthenticated() && targetRoute !== 'login') {
             this.router.navigate(['/login']);
             return false;
+        } else {
+            return true;
         }
     }
 }
