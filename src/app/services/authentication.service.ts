@@ -8,7 +8,8 @@ import { Observable, of } from 'rxjs';
     providedIn: 'root'
 })
 export class AuthenticationService {
-    private keepAliveMs = 300000;
+    // set keep alive for 1 hour
+    private keepAliveMs = 3600000;
 
     constructor(
         private http: HttpClient,
