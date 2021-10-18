@@ -29,10 +29,21 @@ export class PizzaService {
 
     submitPizzaOrder$(newPizzaOrder: PizzaOrder): Observable<void> {
         return this.http.post<PizzaOrder>('/api/orders', newPizzaOrder).pipe(
-            tap((pizzaOrder: PizzaOrder): void => this.snackbarService.displayConfirmationSnackBar(`Order ${pizzaOrder.Order_ID} successfully created!`)),
+            tap((pizzaOrder: PizzaOrder): void => this.snackbarService.displayConfirmationSnackBar(`Order ${pizzaOrder.Order_ID} successfully created.`)),
             switchMap((): Observable<void> => this.refreshPizzaOrders$()),
             catchError((error: HttpErrorResponse): Observable<void> => {
                 this.snackbarService.displayErrorSnackBar(`${error.status === 409 ? error.error.detail : 'An error occurred creating the order.'}`);
+                return of();
+            })
+        );
+    }
+
+    deletePizzaOrder$(orderNumber: number): Observable<void> {
+        return this.http.delete<void>(`/api/orders/${orderNumber}`).pipe(
+            tap((): void => this.snackbarService.displayConfirmationSnackBar(`Order ${orderNumber} successfully deleted.`)),
+            switchMap((): Observable<void> => this.refreshPizzaOrders$()),
+            catchError((error: HttpErrorResponse): Observable<void> => {
+                this.snackbarService.displayErrorSnackBar(`${error.status === 404 ? error.error.detail : 'An error occurred deleting the order.'}`);
                 return of();
             })
         );

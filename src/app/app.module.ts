@@ -18,6 +18,7 @@ import { NewOrderDialogComponent } from './components/new-order-dialog/new-order
 import { NgModule } from '@angular/core';
 import { OrdersComponent } from './components/orders/orders.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         HeaderComponent,
         LoginComponent,
         DashboardComponent,
-        NewOrderDialogComponent
+        NewOrderDialogComponent,
+        ConfirmationDialogComponent
     ],
     imports: [
         BrowserModule,

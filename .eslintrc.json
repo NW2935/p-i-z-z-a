@@ -30,6 +30,11 @@
             "memberSyntaxSortOrder": ["all", "single", "multiple", "none"]
           }
         ],
+        "@typescript-eslint/lines-between-class-members": ["error",
+          {
+            "exceptAfterSingleLine": true
+          }
+        ],
         "@typescript-eslint/comma-dangle": ["error", "never"],
         "@angular-eslint/directive-selector": [
           "error",

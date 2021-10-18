@@ -1,3 +1,14 @@
 table {
     width: 100%;
 }
+
+.delete-order-button {
+    cursor: pointer;
+    height: 100%;
+    margin: 11px 0px;
+    visibility: hidden;
+}
+
+tr:hover .delete-order-button {
+    visibility: visible;
+}
