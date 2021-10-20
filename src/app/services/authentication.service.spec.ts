@@ -5,10 +5,12 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { SnackBarService } from './snack-bar.service';
+import { Subscription } from 'rxjs';
 import { TestBed } from '@angular/core/testing';
 
 describe('AuthenticationService', (): void => {
     let authenticationService: AuthenticationService;
+    let subscription: Subscription;
 
     beforeEach((): void => {
         TestBed.configureTestingModule({
@@ -22,9 +24,11 @@ describe('AuthenticationService', (): void => {
             ]
         });
         authenticationService = TestBed.inject(AuthenticationService);
+        subscription = new Subscription();
     });
 
     afterEach((): void => {
+        subscription.unsubscribe();
         authenticationService.deauthenticate();
     });
 
@@ -34,7 +38,7 @@ describe('AuthenticationService', (): void => {
 
     it('should set jwt token when login request succeeds', (): void => {
         const subscribeSpy = jasmine.createSpy();
-        authenticationService.authenticate$('test', 'test').subscribe(subscribeSpy);
+        subscription.add(authenticationService.authenticate$('test', 'test').subscribe(subscribeSpy));
         const accessToken = localStorage.getItem('access_token');
 
         expect(subscribeSpy).toHaveBeenCalledWith({ access_token: 'success' });
@@ -44,7 +48,7 @@ describe('AuthenticationService', (): void => {
     it('should display an error when login request fails', (): void => {
         const subscribeSpy = jasmine.createSpy();
         const snackbarSpy = spyOn(TestBed.inject(SnackBarService), 'displayErrorSnackBar').and.callThrough();
-        authenticationService.authenticate$('invalid', 'invalid').subscribe(subscribeSpy);
+        subscription.add(authenticationService.authenticate$('invalid', 'invalid').subscribe(subscribeSpy));
         const accessToken = localStorage.getItem('access_token');
 
         expect(subscribeSpy).toHaveBeenCalledWith(false);
@@ -53,12 +57,12 @@ describe('AuthenticationService', (): void => {
     });
 
     it('should be authenticated if jwt token is present and hasn\'t expired', (): void => {
-        authenticationService.authenticate$('test', 'test').subscribe();
+        subscription.add(authenticationService.authenticate$('test', 'test').subscribe());
         expect(authenticationService.isAuthenticated()).toBeTrue();
     });
 
     it('should not be authenticated if jwt token is present and has expired', (): void => {
-        authenticationService.authenticate$('test', 'test').subscribe();
+        subscription.add(authenticationService.authenticate$('test', 'test').subscribe());
         localStorage.setItem('expires_at', JSON.stringify(Date.now() - 100000000) );
         expect(authenticationService.isAuthenticated()).toBeFalse();
     });

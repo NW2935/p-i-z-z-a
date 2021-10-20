@@ -1,6 +1,7 @@
 import { AuthenticationService } from 'src/app/services/authentication.service';
-import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Component, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -11,8 +12,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 /**
  * This component is displayed when a user is not authenticated, allowing them to log in.
  */
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
     public loginForm: FormGroup;
+    private subscription = new Subscription();
 
     constructor(
         private authenticationService: AuthenticationService,
@@ -27,13 +29,17 @@ export class LoginComponent {
 
     onLoginClick(): void {
         const loginInfo = this.loginForm.value;
-        this.authenticationService.authenticate$(
+        this.subscription.add(this.authenticationService.authenticate$(
             loginInfo.username as string,
             loginInfo.password as string
         ).subscribe((loginSuccess: boolean): void => {
             if (loginSuccess) {
                 this.router.navigate(['/dashboard']);
             }
-        });
+        }));
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe();
     }
 }
