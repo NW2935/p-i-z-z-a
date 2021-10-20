@@ -8,7 +8,12 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "docker:build": "docker build -t p-i-z-z-a-image .",
+    "docker:run": "docker run --name p-i-z-z-a-container -d -p 8888:80 p-i-z-z-a-image",
+    "docker:start": "docker start p-i-z-z-a-container",
+    "docker:stop": "docker stop p-i-z-z-a-container",
+    "docker:deploy": "npm run docker:build && npm run docker:run"
   },
   "private": true,
   "dependencies": {
