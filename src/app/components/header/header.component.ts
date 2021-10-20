@@ -7,6 +7,10 @@ import { Router } from '@angular/router';
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.css']
 })
+/**
+ * This component serves as a top-level header for the application, and provides a logout button
+ * if the user is authenticated.
+ */
 export class HeaderComponent {
     constructor(
         public authenticationService: AuthenticationService,

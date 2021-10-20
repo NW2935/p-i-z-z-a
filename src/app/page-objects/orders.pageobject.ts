@@ -4,6 +4,9 @@ import { OrdersComponent } from '../components/orders/orders.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+/**
+ * Page object for testing the orders component.
+ */
 export class OrdersPageObject {
     component: OrdersComponent;
 

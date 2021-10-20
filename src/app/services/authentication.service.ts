@@ -7,6 +7,10 @@ import { Observable, of } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * This service handles authentication requests to the back end as well as managing the access token provided
+ * by the API. This service uses a keep-alive configured to 1 hour.
+ */
 export class AuthenticationService {
     // set keep alive for 1 hour
     private keepAliveMs = 3600000;

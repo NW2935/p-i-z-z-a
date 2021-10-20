@@ -11,6 +11,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css']
 })
+/**
+ * The dashboard component is the main page for this application if the user is authenticated.
+ * It allows for viewing, creating, deleting, and filtering pizza orders.
+ */
 export class DashboardComponent {
     filterToken = '';
 

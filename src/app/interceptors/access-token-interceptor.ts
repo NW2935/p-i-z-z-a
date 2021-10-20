@@ -6,6 +6,10 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/c
 import { Observable, of } from 'rxjs';
 
 @Injectable()
+/**
+ * This interceptor is used by the application to ensure that the authorization token stored
+ * when the user logged in is appended to all requests if it is present.
+ */
 export class AccessTokenInterceptor implements HttpInterceptor {
     constructor(
         private authenticationService: AuthenticationService,

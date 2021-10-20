@@ -7,6 +7,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     templateUrl: './new-order-dialog.component.html',
     styleUrls: ['./new-order-dialog.component.css']
 })
+/**
+ * This component defines the content of the dialog displayed when a user wants to create
+ * a new pizza order.
+ */
 export class NewOrderDialogComponent{
     public pizzaForm: FormGroup;
 

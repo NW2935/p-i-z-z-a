@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HttpClientModule } from '@angular/common/http';

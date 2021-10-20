@@ -13,6 +13,10 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
     templateUrl: './orders.component.html',
     styleUrls: ['./orders.component.css']
 })
+/**
+ * This component is responsible for displaying a list of all orders retrieved by the PizzaService in a table, 
+ * as well as permitting users to delete pizzas.
+ */
 export class OrdersComponent implements OnInit, OnChanges {
     @Input() filterToken = '';
 

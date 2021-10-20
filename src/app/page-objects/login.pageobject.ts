@@ -1,6 +1,9 @@
 import { ComponentFixture } from '@angular/core/testing';
 import { LoginComponent } from '../components/login/login.component';
 
+/**
+ * Page object for testing the LoginComponent.
+ */
 export class LoginPageObject {
     component: LoginComponent;
 

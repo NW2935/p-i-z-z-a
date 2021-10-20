@@ -8,6 +8,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * This service handles requests for listing, creating, and deleting pizza orders.
+ */
 export class PizzaService {
     public pizzaOrders$: Observable<PizzaOrder[]>;
 

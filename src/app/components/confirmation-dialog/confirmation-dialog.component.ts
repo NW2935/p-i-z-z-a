@@ -7,6 +7,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
     templateUrl: './confirmation-dialog.component.html',
     styleUrls: ['./confirmation-dialog.component.css']
 })
+/**
+ * This component is a generic component for providing confirmation dialogs to a user. In this
+ * app, it is only used for pizza deletion confirmation.
+ */
 export class ConfirmationDialogComponent {
     title: string;
     message: string;

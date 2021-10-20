@@ -8,6 +8,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
 })
+/**
+ * This component is displayed when a user is not authenticated, allowing them to log in.
+ */
 export class LoginComponent {
     public loginForm: FormGroup;
 

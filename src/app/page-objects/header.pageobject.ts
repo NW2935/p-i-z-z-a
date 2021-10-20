@@ -2,6 +2,9 @@ import { By } from '@angular/platform-browser';
 import { ComponentFixture } from '@angular/core/testing';
 import { HeaderComponent } from '../components/header/header.component';
 
+/**
+ * Page object for testing the HeaderComponent.
+ */
 export class HeaderPageObject {
     fixture: ComponentFixture<HeaderComponent>;
 

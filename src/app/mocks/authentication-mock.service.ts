@@ -4,6 +4,9 @@ import { Observable, of } from 'rxjs';
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * Mock authentication service used for testing
+ */
 export class AuthenticationMockService {
     // set keep alive for 1 hour
     private keepAliveMs = 3600000;

@@ -5,6 +5,10 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * This guard is used to make sure that the user is routed to the correct route based on their
+ * authentication status.
+ */
 export class AuthGuard implements CanActivate {
     constructor(
         private authenticationService: AuthenticationService,

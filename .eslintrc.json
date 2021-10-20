@@ -21,6 +21,15 @@
         "airbnb-typescript/base"
       ],
       "rules": {
+        "require-jsdoc": ["error", {
+          "require": {
+              "FunctionDeclaration": false,
+              "MethodDefinition": false,
+              "ClassDeclaration": true,
+              "ArrowFunctionExpression": false,
+              "FunctionExpression": false
+          }
+        }],
         "@typescript-eslint/no-unsafe-argument": ["error"],
         "@typescript-eslint/explicit-function-return-type": [
           "error",

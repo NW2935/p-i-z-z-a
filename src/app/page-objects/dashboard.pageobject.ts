@@ -5,6 +5,9 @@ import { PizzaOrder } from '../models/pizza-order';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
+/**
+ * Page object for testing the DashboardComponent.
+ */
 export class DashboardPageObject {
     component: DashboardComponent;
 

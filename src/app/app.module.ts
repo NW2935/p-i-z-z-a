@@ -1,3 +1,4 @@
+/* eslint-disable require-jsdoc */
 import { AccessTokenInterceptor } from './interceptors/access-token-interceptor';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';

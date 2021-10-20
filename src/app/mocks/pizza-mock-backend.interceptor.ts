@@ -3,6 +3,9 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } fr
 import { Observable, of, throwError } from 'rxjs';
 
 @Injectable()
+/**
+ * This interceptor is used to mock back end responses for the purposes of testing the PizzaService.
+ */
 export class PizzaMockBackEndInterceptor implements HttpInterceptor {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

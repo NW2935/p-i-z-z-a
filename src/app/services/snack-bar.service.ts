@@ -4,6 +4,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 @Injectable({
     providedIn: 'root'
 })
+/**
+ * This service provides a simple API for displaying toast notifications throughout the application.
+ */
 export class SnackBarService {
     private defaultAction = 'Dismiss';
 
