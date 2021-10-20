@@ -1,4 +1,3 @@
-import { AuthenticationMockService } from 'src/app/mocks/authentication-mock.service';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { LoginComponent } from './login.component';
@@ -7,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { of } from 'rxjs';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -29,10 +29,7 @@ describe('LoginComponent', (): void => {
                 MatInputModule,
                 MatSnackBarModule
             ],
-            declarations: [ LoginComponent ],
-            providers: [
-                { provide: AuthenticationService, useClass: AuthenticationMockService }
-            ]
+            declarations: [ LoginComponent ]
         });
 
         router = TestBed.inject(Router);
@@ -50,12 +47,14 @@ describe('LoginComponent', (): void => {
     });
 
     it('should navigate to /dashboard if login succeeds', (): void => {
+        spyOn(TestBed.inject(AuthenticationService), 'authenticate$').and.returnValue(of(true));
         const spy = spyOn(router, 'navigate');
         pageObject.login('test', 'test');
         expect(spy).toHaveBeenCalledWith(['/dashboard']);
     });
 
     it('should not navigate if login fails', (): void => {
+        spyOn(TestBed.inject(AuthenticationService), 'authenticate$').and.returnValue(of(false));
         const spy = spyOn(router, 'navigate');
         pageObject.login('invalid', 'invalid');
         expect(spy).not.toHaveBeenCalled();
